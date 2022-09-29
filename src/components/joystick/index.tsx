@@ -4,20 +4,31 @@ import { IJoystickUpdateEvent } from "react-joystick-component/build/lib/Joystic
 
 const MAX_MOVE = 50;
 
-interface JoystickProps {
-  numberOfMotors?: number;
+export interface MoveObject {
+  left: number;
+  right: number;
 }
 
-const Joystick: FC<JoystickProps> = ({ numberOfMotors }) => {
+interface JoystickProps {
+  numberOfMotors?: number;
+  onMove(move: MoveObject): void;
+  onStart?(): void;
+  onStop?(): void;
+  disabled?: boolean;
+}
+
+const Joystick: FC<JoystickProps> = ({
+  numberOfMotors,
+  disabled,
+  onMove,
+  onStart,
+  onStop,
+}) => {
   if (numberOfMotors !== 2) {
     return <>Error: only 2 motors currently supported</>;
   }
 
-  const onStart = () => {
-    //TODO: connect to websocket
-  };
-
-  const onMove = (event: IJoystickUpdateEvent) => {
+  const handleMove = (event: IJoystickUpdateEvent) => {
     const { x, y } = event;
 
     let leftMotor = 0;
@@ -36,30 +47,29 @@ const Joystick: FC<JoystickProps> = ({ numberOfMotors }) => {
       if (turn < 0) {
         leftMotor = leftMotor - Math.abs(turn);
       } else {
-        // turning right
         rightMotor = rightMotor - Math.abs(turn);
+        // turning right
       }
     } else {
       // moving backward
       if (turn > 0) {
-        rightMotor = rightMotor + Math.abs(turn);
-      } else {
         leftMotor = leftMotor + Math.abs(turn);
+      } else {
+        rightMotor = rightMotor + Math.abs(turn);
       }
     }
 
-    console.log({ leftMotor, rightMotor });
-  };
-  const onStop = () => {
-    //TODO: close the connection
+    onMove({ left: leftMotor, right: rightMotor });
   };
 
   return (
     <>
       <JoyStick
+        disabled={disabled}
+        throttle={50}
         baseColor="black"
         stickColor="red"
-        move={onMove}
+        move={handleMove}
         stop={onStop}
         start={onStart}
         size={100}
