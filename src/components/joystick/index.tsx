@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Joystick as JoyStick } from "react-joystick-component";
 import { IJoystickUpdateEvent } from "react-joystick-component/build/lib/Joystick";
 
-const MAX_MOVE = 50;
+const MAX_MOVE = 100;
 
 export interface MoveObject {
   left: number;
@@ -66,7 +66,7 @@ const Joystick: FC<JoystickProps> = ({
     <>
       <JoyStick
         disabled={disabled}
-        throttle={50}
+        throttle={MAX_MOVE * 2}
         baseColor="black"
         stickColor="red"
         move={handleMove}
