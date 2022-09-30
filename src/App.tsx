@@ -3,6 +3,7 @@ import Joystick, { MoveObject } from "./components/joystick";
 import { BaseColors } from "./interfaces/colors";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import { useState } from "react";
+import "./App.css";
 
 const SOCKET_URL = "ws://10.0.0.10:1488";
 
@@ -27,20 +28,20 @@ function App() {
   };
 
   return (
-    <div className="App" style={{ padding: 100 }}>
+    <div className="App">
       <Joystick
         disabled={connectionStatus !== "Open"}
         onStop={handleStop}
         onMove={handleJoystickMove}
       />
-      <Button onPressIn={console.log} onPressOut={console.log}>
+      {/* <Button onPressIn={console.log} onPressOut={console.log}>
         Test Button
       </Button>
       <Button
         color={BaseColors.red}
         onPressIn={console.log}
         onPressOut={console.log}
-      />
+      /> */}
       <div style={{ paddingTop: 50 }}>
         <input
           type="text"
