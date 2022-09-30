@@ -4,7 +4,7 @@ import { BaseColors } from "./interfaces/colors";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import { useState } from "react";
 
-const SOCKET_URL = "ws://10.0.0.10:8765";
+const SOCKET_URL = "ws://10.0.0.10:1488";
 
 function App() {
   const [wsUrl, setWsUrl] = useState(SOCKET_URL);
