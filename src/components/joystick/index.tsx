@@ -72,7 +72,7 @@ const Joystick: FC<JoystickProps> = ({
         move={handleMove}
         stop={onStop}
         start={onStart}
-        size={100}
+        size={200}
       />
     </>
   );
