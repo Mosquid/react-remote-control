@@ -53,9 +53,9 @@ const Joystick: FC<JoystickProps> = ({
     } else {
       // moving backward
       if (turn > 0) {
-        leftMotor = leftMotor + Math.abs(turn);
-      } else {
         rightMotor = rightMotor + Math.abs(turn);
+      } else {
+        leftMotor = leftMotor + Math.abs(turn);
       }
     }
 
