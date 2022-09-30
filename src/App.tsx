@@ -2,7 +2,7 @@ import Button from "./components/button";
 import Joystick, { MoveObject } from "./components/joystick";
 import { BaseColors } from "./interfaces/colors";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import "./App.css";
 
 const SOCKET_URL = "ws://10.0.0.10:1488";
@@ -43,6 +43,7 @@ function App() {
         onPressOut={console.log}
       /> */}
       <div style={{ paddingTop: 50 }}>
+        <p>{connectionStatus}</p>
         <input
           type="text"
           value={wsUrl}
