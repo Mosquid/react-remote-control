@@ -42,6 +42,7 @@ function App() {
         onPressIn={console.log}
         onPressOut={console.log}
       /> */}
+      <iframe title="Stream" src="http://10.0.0.10/stream" />
       <div style={{ paddingTop: 50 }}>
         <p>{connectionStatus}</p>
         <input

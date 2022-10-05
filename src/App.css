@@ -1,8 +1,21 @@
 .App {
+  position: relative;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   height: 100vh;
+}
+
+.App iframe {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -160px;
+  right: 0;
+  height: 250px;
+  width: 320px;
+  pointer-events: none;
+  z-index: -1;
 }
