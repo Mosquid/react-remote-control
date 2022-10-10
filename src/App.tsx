@@ -2,13 +2,14 @@ import Button from "./components/button";
 import Joystick, { MoveObject } from "./components/joystick";
 import { BaseColors } from "./interfaces/colors";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 
 const SOCKET_URL = "ws://10.0.0.10:1488";
 
 function App() {
   const [wsUrl, setWsUrl] = useState(SOCKET_URL);
+  const [light, setLight] = useState(false);
   const { sendMessage, readyState } = useWebSocket(wsUrl);
 
   const connectionStatus = {
@@ -27,8 +28,20 @@ function App() {
     sendMessage(JSON.stringify({ left: 0, right: 0 }));
   };
 
+  const toggleLight = () => {
+    setLight(!light);
+    sendMessage(JSON.stringify({ light: Number(!light) }));
+  };
+
   return (
     <div className="App">
+      <div style={{ marginBottom: 20 }}>
+        <Button
+          onPressIn={toggleLight}
+          color={BaseColors.red}
+          onPressOut={() => console.log}
+        />
+      </div>
       <Joystick
         disabled={connectionStatus !== "Open"}
         onStop={handleStop}
