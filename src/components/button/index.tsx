@@ -1,13 +1,14 @@
 import { FC, ReactNode, MouseEvent } from "react";
-import { BaseColors } from "../../interfaces/colors";
+import { Colors } from "../../Theme";
 import styles from "./style.module.scss";
 import cx from "classnames";
+import { Color } from "../../interfaces";
 
 export interface ButtonProps {
   onPressIn(e: MouseEvent): void;
   onPressOut(e: MouseEvent): void;
   children?: ReactNode;
-  color?: BaseColors;
+  color?: Color;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -29,7 +30,7 @@ const Button: FC<ButtonProps> = ({
 };
 
 Button.defaultProps = {
-  color: BaseColors.green,
+  color: Colors.green,
 };
 
 export default Button;

@@ -6,16 +6,40 @@
   justify-content: center;
   flex-direction: column;
   height: 100vh;
+  max-width: 320px;
+  margin: 0 auto;
+  background: linear-gradient(
+    180deg,
+    rgba(241, 238, 236, 1) 0%,
+    rgba(99, 201, 179, 0.24975927871148462) 100%
+  );
+}
+
+.App label {
+  font-size: 12px;
+  line-height: 1.2;
 }
 
 .App iframe {
+  border: 0;
+  background-color: linear-gradient(
+    180deg,
+    rgba(241, 238, 236, 1) 0%,
+    rgba(235, 226, 33, 0.24975927871148462) 100%
+  );
   position: absolute;
   bottom: 0;
-  left: 50%;
-  margin-left: -160px;
+  left: 0;
   right: 0;
+  top: 0;
   height: 250px;
   width: 320px;
   pointer-events: none;
   z-index: -1;
+}
+
+.grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

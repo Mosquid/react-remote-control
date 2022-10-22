@@ -1,9 +1,10 @@
 import Button from "./components/button";
 import Joystick, { MoveObject } from "./components/joystick";
-import { BaseColors } from "./interfaces/colors";
+import { Colors } from "./Theme";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import { useState } from "react";
 import "./App.css";
+import Toggle from "./components/toggle";
 
 const SOCKET_URL = "ws://10.0.0.10:1488";
 
@@ -28,34 +29,32 @@ function App() {
     sendMessage(JSON.stringify({ left: 0, right: 0 }));
   };
 
-  const toggleLight = () => {
-    setLight(!light);
-    sendMessage(JSON.stringify({ light: Number(!light) }));
+  const sendBeep = () => {
+    sendMessage(JSON.stringify({ light: 1 }));
   };
 
   return (
     <div className="App">
+      <iframe title="Stream" src="http://10.0.0.10/stream" />
       <div style={{ marginBottom: 20 }}>
-        <Button
-          onPressIn={toggleLight}
-          color={BaseColors.red}
-          onPressOut={() => console.log}
-        />
+        <div className="grid">
+          <div>
+            <label>Beep</label>
+            <br />
+            <Button
+              onPressIn={sendBeep}
+              color={Colors.red}
+              onPressOut={() => console.log}
+            />
+          </div>
+          <Toggle onChange={setLight} active={light} label="Lights" />
+        </div>
       </div>
       <Joystick
         disabled={connectionStatus !== "Open"}
         onStop={handleStop}
         onMove={handleJoystickMove}
       />
-      {/* <Button onPressIn={console.log} onPressOut={console.log}>
-        Test Button
-      </Button>
-      <Button
-        color={BaseColors.red}
-        onPressIn={console.log}
-        onPressOut={console.log}
-      /> */}
-      <iframe title="Stream" src="http://10.0.0.10/stream" />
       <div style={{ paddingTop: 50 }}>
         <p>{connectionStatus}</p>
         <input

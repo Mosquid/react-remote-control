@@ -1,0 +1,30 @@
+.root {
+  font-size: 12px;
+  line-height: 1.2;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.button {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(113, 113, 113);
+  border-radius: 100%;
+  margin: 5px auto;
+}
+
+.led {
+  width: 10px;
+  height: 10px;
+  background-color: gray;
+  border-radius: 5px;
+  .active & {
+    background-color: red;
+  }
+}
