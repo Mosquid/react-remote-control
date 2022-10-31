@@ -42,7 +42,7 @@ const Joystick: FC<JoystickProps> = ({
     rightMotor = moveY / MAX_MOVE;
 
     // moving forward
-    if (moveY > MAX_MOVE / 2) {
+    if (moveY > 0) {
       // turning left
       if (turn < 0) {
         leftMotor = leftMotor - Math.abs(turn);
