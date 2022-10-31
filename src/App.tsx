@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div className="App">
-      <iframe title="Stream" src="http://10.0.0.10/stream" />
+      <iframe title="Stream" src="http://10.0.0.10:8000" />
       <div style={{ marginBottom: 20 }}>
         <div className="grid">
           <div>
