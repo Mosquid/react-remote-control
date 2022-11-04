@@ -33,9 +33,11 @@ function App() {
     sendMessage(JSON.stringify({ light: 1 }));
   };
 
+  // const { hostname } = window.location;
+  const hostname = "192.168.1.29";
   return (
     <div className="App">
-      <iframe title="Stream" src="http://10.0.0.10:8000" />
+      <iframe title="Stream" src={`http://${hostname}:8000`} />
       <div style={{ marginBottom: 20 }}>
         <div className="grid">
           <div>
