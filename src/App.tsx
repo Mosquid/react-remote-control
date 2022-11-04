@@ -6,10 +6,9 @@ import { useState } from "react";
 import "./App.css";
 import Toggle from "./components/toggle";
 
-const SOCKET_URL = "ws://10.0.0.10:1488";
-
 function App() {
-  const [wsUrl, setWsUrl] = useState(SOCKET_URL);
+  const { hostname } = window.location;
+  const [wsUrl, setWsUrl] = useState(`ws://${hostname}:1488`);
   const [light, setLight] = useState(false);
   const { sendMessage, readyState } = useWebSocket(wsUrl);
 
@@ -33,8 +32,6 @@ function App() {
     sendMessage(JSON.stringify({ light: 1 }));
   };
 
-  // const { hostname } = window.location;
-  const hostname = "192.168.1.29";
   return (
     <div className="App">
       <iframe title="Stream" src={`http://${hostname}:8000`} />
