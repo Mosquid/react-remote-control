@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type Payload = unknown;
 
@@ -7,12 +7,30 @@ export const useHttpTransport = (apiUrl: string) => {
   const [error, setError] = useState<Error | undefined>(undefined);
   const abortController = new AbortController();
   const { signal } = abortController;
+  const queue = useRef<Array<Payload>>([]);
+  const [promise, setPromise] = useState<Promise<Payload> | undefined>();
 
   const maybeStringify = (payload: Payload): string => {
     try {
       return JSON.stringify(payload);
     } catch (error) {
       return payload as unknown as string;
+    }
+  };
+
+  const chain = (payload: Payload): void => {
+    queue.current.push(payload);
+
+    if (!promise) next();
+  };
+
+  const next = async () => {
+    if (queue.current.length) {
+      const current = queue.current.shift();
+
+      setPromise(post(current).then(() => next()));
+    } else {
+      setPromise(undefined);
     }
   };
 
@@ -35,7 +53,7 @@ export const useHttpTransport = (apiUrl: string) => {
   };
 
   return {
-    post,
+    chain,
     error,
     loading,
   };

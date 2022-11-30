@@ -3,14 +3,16 @@ import Joystick, { MoveObject } from "../components/joystick";
 import { useHttpTransport } from "../hooks";
 
 const HttpView: FC<{}> = () => {
-  const { loading, error, post } = useHttpTransport("http://10.0.0.12");
+  const { loading, error, chain } = useHttpTransport("http://10.0.0.10");
 
   const handleStop = () => {
     console.log("stop");
+    chain({ x: 0, y: 0 });
   };
 
   const handleJoystickMove = (move: MoveObject) => {
-    post(move);
+    const { x, y } = move;
+    chain({ x, y });
   };
 
   return (

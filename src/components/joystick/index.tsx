@@ -7,6 +7,8 @@ const MAX_MOVE = 100;
 export interface MoveObject {
   left: number;
   right: number;
+  x: number;
+  y: number;
 }
 
 interface JoystickProps {
@@ -59,7 +61,7 @@ const Joystick: FC<JoystickProps> = ({
       }
     }
 
-    onMove({ left: leftMotor, right: rightMotor });
+    onMove({ left: leftMotor, right: rightMotor, x: x ?? 0, y: y ?? 0 });
   };
 
   return (
@@ -72,7 +74,7 @@ const Joystick: FC<JoystickProps> = ({
         move={handleMove}
         stop={onStop}
         start={onStart}
-        size={200}
+        size={MAX_MOVE * 2}
       />
     </>
   );
