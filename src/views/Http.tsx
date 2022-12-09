@@ -1,9 +1,11 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import Joystick, { MoveObject } from "../components/joystick";
 import { useHttpTransport } from "../hooks";
 
 const HttpView: FC<{}> = () => {
-  const { loading, error, chain } = useHttpTransport("http://10.0.0.10");
+  const { hostname } = window.location;
+  const [apiUrl, setApiUrl] = useState(`http://${hostname}`);
+  const { loading, error, chain } = useHttpTransport(apiUrl);
 
   const handleStop = () => {
     console.log("stop");
@@ -20,6 +22,11 @@ const HttpView: FC<{}> = () => {
       <Joystick onStop={handleStop} onMove={handleJoystickMove} />
       <div>Loading: {loading}</div>
       <div>Error: {error?.message}</div>
+      <input
+        type="text"
+        value={apiUrl}
+        onChange={(e) => setApiUrl(e.target.value)}
+      />
     </>
   );
 };
